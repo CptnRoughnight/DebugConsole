@@ -11,6 +11,13 @@ Ingame DebugConsole Godot 4+ C#
 	- ArrowUp - last command
 	- ArrowDown - next command
 
+- commands : (parameter list)
+	- "set" (instance,field,value)
+	- "get" (instance,field) -> print
+	- "call" (instance,method)
+	- "watch" (instance,field,timeToUpdate)
+	
+		
 - register methods you can call with the console with "[ConsoleInstance].RegisterMethod"
 
 
