@@ -14,7 +14,7 @@ Ingame DebugConsole Godot 4+ C#
 - commands : (parameter list)
 	- "set" (instance,field,value)			set a value of a field of an instance
 	- "get" (instance,field) -> print		get a value from a field of an instance
-	- "call" (instance,method)			call a registered method
+	- "call" (instance,method)			call a registered method with parameters
 	- "watch" (instance,field,timeToUpdate)		adds field of instance to the watchlist with update interval
 	- "exit" 					exits the whole game
 	- "reload"					reloads current scene
