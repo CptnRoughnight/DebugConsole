@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://j7ccwv8dcc3n"]
+
+[ext_resource type="Script" path="res://DebugConsole/Fields.cs" id="1_d3702"]
+
+[node name="Fields" type="Window"]
+auto_translate_mode = 1
+transparent_bg = true
+position = Vector2i(500, 73)
+size = Vector2i(600, 200)
+transparent = true
+script = ExtResource("1_d3702")
+
+[node name="OptionButton" type="OptionButton" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+
+[connection signal="item_focused" from="OptionButton" to="." method="_on_option_button_item_focused"]
+[connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]

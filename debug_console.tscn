@@ -1,0 +1,164 @@
+[gd_scene load_steps=9 format=3 uid="uid://c1ec71ic7aw4w"]
+
+[ext_resource type="Script" path="res://DebugConsole/DebugConsole.cs" id="1_c15a1"]
+[ext_resource type="PackedScene" uid="uid://c2hj70o8w0v3g" path="res://DebugConsole/CommandLine.tscn" id="2_h5o66"]
+[ext_resource type="PackedScene" uid="uid://j7ccwv8dcc3n" path="res://DebugConsole/fields.tscn" id="3_1lu1h"]
+[ext_resource type="Texture2D" uid="uid://bwhrijav88x26" path="res://assets/hud/attention.png" id="3_b7o0v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l8u06"]
+bg_color = Color(0.137255, 0.380392, 0.47451, 0.756863)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_y2yw6"]
+resource_name = "fade_in"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-500, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_6p0gs"]
+resource_name = "fade_out"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -500, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ct5y2"]
+_data = {
+"fade_in": SubResource("Animation_y2yw6"),
+"fade_out": SubResource("Animation_6p0gs")
+}
+
+[node name="DebugConsole" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c15a1")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -500.0
+offset_bottom = -100.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l8u06")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextEdit" type="RichTextLabel" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_following = true
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="WatchList" type="RichTextLabel" parent="Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="LineEdit" parent="Panel/VBoxContainer" instance=ExtResource("2_h5o66")]
+layout_mode = 2
+
+[node name="Attention" type="Sprite2D" parent="Panel"]
+visible = false
+texture_filter = 1
+position = Vector2(1903, 384)
+texture = ExtResource("3_b7o0v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_ct5y2")
+}
+speed_scale = 2.0
+
+[node name="Command" parent="." instance=ExtResource("3_1lu1h")]
+title = "Select Command"
+position = Vector2i(665, 455)
+visible = false
+
+[node name="Instances" parent="." instance=ExtResource("3_1lu1h")]
+title = "Select Instance"
+position = Vector2i(665, 455)
+visible = false
+
+[node name="Field" parent="." instance=ExtResource("3_1lu1h")]
+title = "Select Field"
+position = Vector2i(665, 455)
+visible = false
+
+[node name="Methods" parent="." instance=ExtResource("3_1lu1h")]
+title = "Select Field"
+position = Vector2i(665, 455)
+visible = false
+
+[connection signal="onAllAccessToggle" from="Panel/VBoxContainer/LineEdit" to="." method="_on_line_edit_on_all_access_toggle"]
+[connection signal="onCommandDown" from="Panel/VBoxContainer/LineEdit" to="." method="_on_line_edit_on_command_down"]
+[connection signal="onCommandEnter" from="Panel/VBoxContainer/LineEdit" to="." method="_on_line_edit_on_command_enter"]
+[connection signal="onCommandUp" from="Panel/VBoxContainer/LineEdit" to="." method="_on_line_edit_on_command_up"]
+[connection signal="onHelpPressed" from="Panel/VBoxContainer/LineEdit" to="." method="_on_line_edit_on_help_pressed"]
+[connection signal="close_requested" from="Command" to="." method="_on_command_close_requested"]
+[connection signal="onItemSelected" from="Command" to="." method="_on_command_on_item_selected"]
+[connection signal="close_requested" from="Instances" to="." method="_on_instances_close_requested"]
+[connection signal="onItemSelected" from="Instances" to="." method="_on_instances_on_item_selected"]
+[connection signal="close_requested" from="Field" to="." method="_on_field_close_requested"]
+[connection signal="onItemSelected" from="Field" to="." method="_on_field_on_item_selected"]
+[connection signal="close_requested" from="Methods" to="." method="_on_methods_close_requested"]
+[connection signal="onItemSelected" from="Methods" to="." method="_on_methods_on_item_selected"]

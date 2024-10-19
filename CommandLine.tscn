@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2hj70o8w0v3g"]
+
+[ext_resource type="Script" path="res://DebugConsole/CommandLine.cs" id="1_p68ee"]
+
+[node name="LineEdit" type="LineEdit"]
+script = ExtResource("1_p68ee")
