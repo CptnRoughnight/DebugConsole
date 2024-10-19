@@ -19,6 +19,9 @@ Ingame DebugConsole Godot 4+ C#
 	- "exit" 					exits the whole game
 	- "reload"					reloads current scene
 	
+- Attributes :
+	- for "safe-mode" you can Tag classes and field with [ExposeDebugConsole], so you can easily acces the values you want
+
 		
 - register methods you can call with the console with "[ConsoleInstance].RegisterMethod"
 
