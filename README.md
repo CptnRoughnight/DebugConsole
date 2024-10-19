@@ -8,6 +8,9 @@ Ingame DebugConsole Godot 4+ C#
 	- F10 to open the console
 	- F2 to switch to unsafe mode (all fields are accessable)
 	- F1 to open Command-Selector
+	- ArrowUp - last command
+	- ArrowDown - next command
+
 - register methods you can call with the console with "[ConsoleInstance].RegisterMethod"
 
 
