@@ -12,10 +12,12 @@ Ingame DebugConsole Godot 4+ C#
 	- ArrowDown - next command
 
 - commands : (parameter list)
-	- "set" (instance,field,value)
-	- "get" (instance,field) -> print
-	- "call" (instance,method)
-	- "watch" (instance,field,timeToUpdate)
+	- "set" (instance,field,value)			set a value of a field of an instance
+	- "get" (instance,field) -> print		get a value from a field of an instance
+	- "call" (instance,method)			call a registered method
+	- "watch" (instance,field,timeToUpdate)		adds field of instance to the watchlist with update interval
+	- "exit" 					exits the whole game
+	- "reload"					reloads current scene
 	
 		
 - register methods you can call with the console with "[ConsoleInstance].RegisterMethod"
